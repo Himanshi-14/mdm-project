@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>QuizArena</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+
+<body>
+
+
+    <header class="header">
+
+        <a href="#" class="logo" onclick="home()">
+            🏆 Quiz<span>Arena</span>
+        </a>
+
+
+        <nav id="nav">
+
+            <button onclick="home()">
+                Home
+            </button>
+
+            <button onclick="competitions()">
+                Competitions
+            </button>
+
+            <button onclick="leaderboard()">
+                Leaderboard
+            </button>
+
+            <button onclick="about()">
+                About
+            </button>
+
+            <button class="login" onclick="admin()">
+                Admin
+            </button>
+
+        </nav>
+
+
+        <button class="menu" onclick="toggleMenu()">
+            ☰
+        </button>
+
+    </header>
+
+
+
+    <main>
+
+
+        <!-- HOME -->
+
+        <section id="home" class="view">
+
+            <div class="hero">
+
+                <div>
+
+                    <small>
+                        ONLINE QUIZ COMPETITION PLATFORM
+                    </small>
+
+                    <h1>
+                        Test your knowledge.
+                        <br>
+
+                        <span>
+                            Challenge your limits.
+                        </span>
+                    </h1>
+
+                    <p>
+                        Take timed quizzes, get instant results
+                        and compete for the top position.
+                    </p>
+
+                    <button class="primary" onclick="competitions()">
+                        Explore Competitions →
+                    </button>
+
+                </div>
+
+
+                <div class="hero-card">
+
+                    🏆
+
+                    <h2>
+                        Compete. Score. Rank.
+                    </h2>
+
+                    <p>
+                        Timed rounds • Instant results • Leaderboard
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="stats">
+
+                <div>
+
+                    <b id="count">
+                        0
+                    </b>
+
+                    <span>
+                        Competitions
+                    </span>
+
+                </div>
+
+
+                <div>
+
+                    <b>
+                        MCQ
+                    </b>
+
+                    <span>
+                        Question Format
+                    </span>
+
+                </div>
+
+
+                <div>
+
+                    <b>
+                        ⚡
+                    </b>
+
+                    <span>
+                        Instant Results
+                    </span>
+
+                </div>
+
+
+                <div>
+
+                    <b>
+                        🏆
+                    </b>
+
+                    <span>
+                        Ranking
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <h2>
+                Popular Competitions
+            </h2>
+
+            <div id="homeGrid" class="grid"></div>
+
+        </section>
+
+
+
+        <!-- COMPETITIONS -->
+
+        <section id="competitions" class="view hidden">
+
+            <small>
+                COMPETE
+            </small>
+
+            <h1>
+                Available Competitions
+            </h1>
+
+            <p class="muted">
+                Choose a quiz and start your challenge.
+            </p>
+
+            <div id="grid" class="grid"></div>
+
+        </section>
+
+
+
+        <!-- QUIZ -->
+
+        <section id="quiz" class="view hidden">
+
+            <div class="quizhead">
+
+                <div>
+
+                    <small id="cat"></small>
+
+                    <h1 id="title"></h1>
+
+                    <p id="progress"></p>
+
+                </div>
+
+
+                <div id="timer" class="timer">
+                    00:00
+                </div>
+
+            </div>
+
+
+            <div class="bar">
+
+                <i id="bar"></i>
+
+            </div>
+
+
+            <div class="question">
+
+                <b id="qno"></b>
+
+                <h2 id="question"></h2>
+
+                <div id="options"></div>
+
+
+                <div class="actions">
+
+                    <button class="secondary" onclick="prev()">
+                        ← Previous
+                    </button>
+
+
+                    <button class="primary" id="next" onclick="next()">
+                        Next →
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- RESULT -->
+
+        <section id="result" class="view hidden">
+
+            <div class="result">
+
+                <div>
+                    🎉
+                </div>
+
+                <small>
+                    COMPETITION COMPLETE
+                </small>
+
+                <h1 id="resultTitle"></h1>
+
+
+                <div class="circle">
+
+                    <b id="score"></b>
+
+                    <span id="percent"></span>
+
+                </div>
+
+
+                <p id="message"></p>
+
+
+                <button class="primary" onclick="leaderboard()">
+                    View Leaderboard
+                </button>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- LEADERBOARD -->
+
+        <section id="leaderboard" class="view hidden">
+
+            <small>
+                TOP PARTICIPANTS
+            </small>
+
+            <h1>
+                Leaderboard
+            </h1>
+
+
+            <select id="leaderQuiz" onchange="loadBoard()"></select>
+
+
+            <div class="table">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Rank
+                            </th>
+
+                            <th>
+                                Participant
+                            </th>
+
+                            <th>
+                                Score
+                            </th>
+
+                            <th>
+                                Accuracy
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="body"></tbody>
+
+                </table>
+
+                <p id="empty" class="muted"></p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ABOUT -->
+
+        <section id="about" class="view hidden">
+
+            <div class="about">
+
+                <small>
+                    ABOUT THE PROJECT
+                </small>
+
+                <h1>
+                    QuizArena
+                </h1>
+
+                <p>
+                    QuizArena is a web-based quiz competition
+                    platform for colleges, schools and technical events.
+                </p>
+
+
+                <div class="features">
+
+                    <div>
+
+                        👨‍🎓
+
+                        <b>
+                            Student
+                        </b>
+
+                        <p>
+                            Join quizzes and view results.
+                        </p>
+
+                    </div>
+
+
+                    <div>
+
+                        👨‍💼
+
+                        <b>
+                            Organizer
+                        </b>
+
+                        <p>
+                            Create and publish quizzes.
+                        </p>
+
+                    </div>
+
+
+                    <div>
+
+                        ⏱️
+
+                        <b>
+                            Timer
+                        </b>
+
+                        <p>
+                            Timed competition rounds.
+                        </p>
+
+                    </div>
+
+
+                    <div>
+
+                        🏆
+
+                        <b>
+                            Leaderboard
+                        </b>
+
+                        <p>
+                            Compare participant scores.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ADMIN -->
+
+        <section id="admin" class="view hidden">
+
+            <small>
+                ORGANIZER PANEL
+            </small>
+
+            <h1>
+                Create Competition
+            </h1>
+
+
+            <form id="form" class="form">
+
+                <label>
+
+                    Quiz Title
+
+                    <input id="nt" required>
+
+                </label>
+
+
+                <label>
+
+                    Category
+
+                    <input id="nc" required>
+
+                </label>
+
+
+                <label>
+
+                    Duration (minutes)
+
+                    <input id="nd" type="number" value="10" min="1" required>
+
+                </label>
+
+
+                <label>
+
+                    Description
+
+                    <textarea id="ndesc"></textarea>
+
+                </label>
+
+
+                <div id="builder"></div>
+
+
+                <button type="button" class="secondary" onclick="addQuestion()">
+                    + Add Question
+                </button>
+
+
+                <button class="primary">
+                    Publish Competition
+                </button>
+
+            </form>
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- NAME MODAL -->
+
+    <div id="modal" class="modal hidden">
+
+        <div class="modalbox">
+
+            <button class="close" onclick="closeModal()">
+                ×
+            </button>
+
+            <small>
+                READY TO COMPETE?
+            </small>
+
+            <h2>
+                Enter your name
+            </h2>
+
+
+            <input id="name" placeholder="Your name">
+
+
+            <button class="primary full" onclick="start()">
+                Start Competition →
+            </button>
+
+        </div>
+
+    </div>
+
+
+
+    <footer>
+
+        🏆 QuizArena
+
+        <span>
+            HTML • CSS • JavaScript • Node.js • MongoDB
+        </span>
+
+    </footer>
+
+
+    <script src="js/app.js"></script>
+
+</body>
+
+</html>
